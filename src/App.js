@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 function App() {
   const [quotes, setQuotes] = useState([]);
@@ -12,6 +12,13 @@ function App() {
   useEffect(() => {
     FetchData();
   }, []);
+
+  const textRef = useRef();
+  let colors = ["#ffff00", "#b2ff22", "#90ee90", "#ff68ff", "#a9a9e7"];
+  useEffect(() => {
+    textRef.current.style.color =
+      colors[Math.floor(Math.random() * colors.length)];
+  }, [quotes]);
   //   console.log(author);
   console.log(quotes);
   return (
@@ -20,12 +27,12 @@ function App() {
         <div className="quotes">
           {quotes ? (
             <>
-              <p>{quotes.text}</p>
+              <p ref={textRef}>{quotes.text}</p>
               <h2>{quotes.author ? quotes.author : "Unkown"}</h2>
               <br />
             </>
           ) : (
-            <></>
+            <>...</>
           )}
         </div>
         <button onClick={FetchData}>Get Quote</button>

@@ -55,7 +55,10 @@ h2 {
   margin-top: 0.6rem;
   padding-bottom: 10px;
 }
-
+p {
+  font-style: italic;
+  font-weight: 666;
+}
 button {
   display: inline-block;
   cursor: pointer;
