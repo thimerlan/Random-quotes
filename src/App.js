@@ -21,7 +21,7 @@ function App() {
           {quotes ? (
             <>
               <p>{quotes.text}</p>
-              <h2>{quotes ? quotes.author : "Unkown"}</h2>
+              <h2>{quotes.author ? quotes.author : "Unkown"}</h2>
               <br />
             </>
           ) : (
