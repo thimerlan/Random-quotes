@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
-
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import "./App.css";
 function App() {
+  const [quotes, setQuotes] = useState([]);
+  async function FetchData() {
+    const response = await axios.get("https://type.fit/api/quotes/");
+    let lvl = Math.floor(Math.random() * response.data.length);
+    setQuotes(response.data[lvl]);
+  }
+
+  useEffect(() => {
+    FetchData();
+  }, []);
+  //   console.log(author);
+  console.log(quotes);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <div className="content">
+        <div className="quotes">
+          {quotes ? (
+            <>
+              <p>{quotes.text}</p>
+              <h2>{quotes ? quotes.author : "Unkown"}</h2>
+              <br />
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
+        <button onClick={FetchData}>Get Quote</button>
+      </div>
+    </main>
   );
 }
 
